@@ -1,4 +1,4 @@
-# 🍔 PDV Lanchonete
+# PDV Lanchonete
 
 Sistema de ponto de venda (PDV) para lanchonete — 100% backend, sem interface gráfica. Projeto acadêmico (FATEC São José dos Campos, Análise e Desenvolvimento de Sistemas — Fase 1: Concepção).
 
@@ -26,7 +26,7 @@ Não há interface gráfica — o foco do projeto é o domínio de negócio, a A
 
 Fluxo âncora do sistema: **criar pedido → baixar estoque → publicar na fila → cozinha atualiza status**.
 
-## 🛠️ Tecnologias
+## Tecnologias
 
 <a id="tecnologias"></a>
 
@@ -42,7 +42,7 @@ Fluxo âncora do sistema: **criar pedido → baixar estoque → publicar na fila
 
 </div>
 
-## 🔎 Requisitos
+## Requisitos
 
 <a id="requisitos"></a>
 
@@ -50,7 +50,7 @@ Fluxo âncora do sistema: **criar pedido → baixar estoque → publicar na fila
 - [uv](https://docs.astral.sh/uv/) como gerenciador de dependências
 - Docker + Docker Compose (para o PostgreSQL)
 
-## 🏛️ Arquitetura
+##  Arquitetura
 
 <a id="arquitetura"></a>
 
@@ -127,7 +127,7 @@ proj-pdv/
 └── README.md              # Documentação principal (📍 Você está aqui!)
 ```
 
-## ⚙️ Como rodar o projeto?
+## Como rodar o projeto?
 
 <a id="rodar"></a>
 
@@ -150,7 +150,7 @@ uv run uvicorn src.main:app --reload
 
 API disponível em `http://127.0.0.1:8000`. Health check: `GET /health`.
 
-## 🖥️ Comandos úteis
+## Comandos úteis
 
 <a id="comandos"></a>
 
@@ -166,28 +166,3 @@ API disponível em `http://127.0.0.1:8000`. Health check: `GET /health`.
 | `uv run alembic revision -m "mensagem"`   | Cria uma nova migration                 |
 | `docker compose up -d postgres`           | Sobe o banco PostgreSQL                 |
 
-## ✅ Status
-
-<a id="status"></a>
-
-Progresso por épico (ordem de execução do MVP):
-
-- [x] Épico 0 — Fundação (estrutura do projeto, migrations base)
-- [x] Épico 1 — Catálogo (entidades `Produto`, `Ingrediente`, `Combo`) — repositório/endpoint de cadastro (RF11) em andamento
-- [x] Épico 2 — Pedidos (entidade `Pedido`, `EstoqueService` com baixa recursiva, `CriarPedidoUseCase`) — endpoints HTTP e cancelamento em andamento
-- [ ] Épico 3 — Cozinha (fila de mensageria + consumer)
-- [ ] Épico 4 — Caixa (abertura/fechamento)
-- [ ] Épico 5 — Autenticação, mesas, pagamento, relatório diário
-- [ ] Épico 6 — Delivery, relatório de mais vendidos, abertura automática de caixa, cache
-
-## 👥 Créditos
-
-<a id="creditos"></a>
-
-<div align="center">
-
-| Nome | Perfil no GitHub |
-| ---- | ----------------- |
-| Leonardo | [GitHub](https://github.com/) |
-
-</div>
