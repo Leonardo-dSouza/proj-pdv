@@ -24,11 +24,13 @@ STATUS_QUE_DEVOLVEM_ESTOQUE_AO_CANCELAR = {StatusPedido.ABERTO, StatusPedido.PRE
 class Pedido:
     tipo: TipoPedido
     id: uuid.UUID = field(default_factory=uuid.uuid4)
+    operador_id: uuid.UUID | None = None
     status: StatusPedido = StatusPedido.ABERTO
-    data_hora: datetime = field(default_factory=datetime.utcnow)
+    data_hora: datetime = field(default_factory=datetime.now)
     itens: list[ItemPedido] = field(default_factory=list)
     taxa_entrega: Decimal = Decimal("0")
     mesa_id: uuid.UUID | None = None
+
 
     def adicionar_item(self, item_pedido: ItemPedido) -> None:
         if self.status != StatusPedido.ABERTO:
