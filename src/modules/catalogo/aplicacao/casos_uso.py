@@ -15,7 +15,7 @@ class CriarProdutosUseCase:
 
     def executar(self, dto: CriarProdutoDTO) -> Produto:
         produto = Produto(nome=dto.nome, preco=dto.preco, ativo=dto.ativo, composicao=[])
-        return self.__getattribute__repositorio.adicionar(produto)
+        return self._repositorio.salvar(produto)
     
 
 class CriarIngredientesUseCase:
@@ -29,8 +29,8 @@ class CriarIngredientesUseCase:
             valor=dto.valor,
             estoque_minimo=dto.estoque_minimo
         )
-        return self._repositorio.adicionar(ingrediente)
-    
+        return self._repositorio.salvar_novo(ingrediente)
+
 class VincularComposicaoUseCase:
     def __init__(self, sessao, repositorio_produtos, repositorio_ingredientes) -> None:
         self._sessao = sessao
@@ -41,7 +41,7 @@ class VincularComposicaoUseCase:
 
         self._repositorio_produto.obter_por_id(dto.produto_id)
         try:
-            self._repositorio_ingredientes.obter_por_id(dto.ingrediente_id)
+            self._repositorio_ingredientes.obter_para_atualizacao(dto.ingrediente_id)
         except IngredienteNaoEncontradoError:
             raise IngredienteNaoEncontradoError(f"Ingrediente com ID {dto.ingrediente_id} não encontrado.")
         

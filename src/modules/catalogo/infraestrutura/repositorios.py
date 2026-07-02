@@ -22,6 +22,23 @@ class ProdutoRepositorySQLAlchemy:
         if model is None:
             raise ItemNaoEncontradoError(f"Produto {produto_id} não encontrado.")
         return produto_para_dominio(model)
+    
+    def salvar(self, produto):
+        model = ProdutoModel(nome=produto.nome, preco=produto.preco, ativo=produto.ativo)
+        self._sessao.add(model)
+        self._sessao.flush()
+        self._sessao.commit()
+        self._sessao.refresh(model)
+        return produto_para_dominio(model)
+
+    def vincular_composicao(self, produto_id: uuid.UUID, ingrediente_id: uuid.UUID, quantidade) -> None:
+        from src.modules.catalogo.infraestrutura.modelos import ComposicaoItemModel
+
+        vinculo = ComposicaoItemModel(
+            produto_id=produto_id, ingrediente_id=ingrediente_id, quantidade=quantidade
+        )
+        self._sessao.add(vinculo)
+        self._sessao.commit()
 
 
 class ComboRepositorySQLAlchemy:
@@ -52,3 +69,16 @@ class IngredienteRepositorySQLAlchemy:
         model = self._sessao.get(IngredienteModel, ingrediente.id)
         model.quantidade_estoque = ingrediente.quantidade_estoque
         self._sessao.flush()
+
+    def salvar_novo(self, ingrediente):
+        model = IngredienteModel(
+            nome=ingrediente.nome,
+            quantidade_estoque=ingrediente.quantidade_estoque,
+            valor=ingrediente.valor,
+            estoque_minimo=ingrediente.estoque_minimo,
+        )
+        self._sessao.add(model)
+        self._sessao.flush()
+        self._sessao.commit()
+        self._sessao.refresh(model)
+        return ingrediente_para_dominio(model)
