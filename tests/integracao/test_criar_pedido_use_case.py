@@ -48,6 +48,7 @@ def test_criar_pedido_balcao_debita_estoque(sessao_db):
         repositorio_caixa=CaixaRepositorySQLAlchemy(sessao_db),
         repositorio_pedido=PedidoRepositorySQLAlchemy(sessao_db),
         publicador_eventos=PublicadorEventosNulo(),
+        publicador_fila=PublicadorEventosNulo(),
     )
 
     dto = CriarPedidoDTO(
@@ -68,6 +69,23 @@ def test_criar_pedido_balcao_debita_estoque(sessao_db):
 
 
 def test_criar_pedido_sem_caixa_aberto_lanca_excecao(sessao_db):
+    sessao_db.execute(
+        __import__("sqlalchemy").text(
+            "DELETE FROM caixa"
+        )
+    )
+    
+    operador_id = uuid.uuid4()
+    sessao_db.execute(
+        __import__("sqlalchemy").text(
+            "INSERT INTO operadores (id, nome, email, senha, perfil) "
+            "VALUES (:id, 'Teste', 'teste@teste.com', 'hash', 'ATENDENTE')"
+        ),
+        {"id": operador_id},
+    )
+
+    sessao_db.flush()
+    
     use_case = CriarPedidoUseCase(
         sessao=sessao_db,
         repositorio_produto=ProdutoRepositorySQLAlchemy(sessao_db),
@@ -76,8 +94,9 @@ def test_criar_pedido_sem_caixa_aberto_lanca_excecao(sessao_db):
         repositorio_caixa=CaixaRepositorySQLAlchemy(sessao_db),
         repositorio_pedido=PedidoRepositorySQLAlchemy(sessao_db),
         publicador_eventos=PublicadorEventosNulo(),
+        publicador_fila=PublicadorEventosNulo()
     )
-    dto = CriarPedidoDTO(tipo=TipoPedido.BALCAO, operador_id=uuid.uuid4(), itens=[])
+    dto = CriarPedidoDTO(tipo=TipoPedido.BALCAO, operador_id=operador_id, itens=[])
 
     with pytest.raises(CaixaFechadoError):
         use_case.executar(dto)

@@ -10,4 +10,4 @@ class CaixaRepositorySQLAlchemy:
 
     def existe_caixa_aberto(self) -> bool:
         stmt = select(CaixaModel).where(CaixaModel.status == "ABERTO")
-        return self._sessao.execute(stmt).scalar_one_or_none() is not None
+        return self._sessao.execute(stmt).first() is not None
