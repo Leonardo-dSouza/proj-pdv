@@ -5,11 +5,7 @@ from sqlalchemy import engine_from_config, pool
 from alembic import context
 from src.config.settings import obter_configuracoes
 from src.infrastructure.database import Base
-
-# Conforme cada módulo for criado, importar seus modelos aqui
-# (ou agregar em src/infrastructure/database.py) para o autogenerate
-# do Alembic enxergar as tabelas. Exemplo:
-# from src.modules.produtos.infraestrutura.modelos import ProdutoModel  # noqa: F401
+from src.modules.catalogo.infraestrutura.modelos import ProdutoModel, IngredienteModel, ComposicaoItemModel, ComboModel, ComboProdutoModel  
 
 config = context.config
 
