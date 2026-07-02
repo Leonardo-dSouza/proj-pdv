@@ -1,5 +1,7 @@
 from fastapi import FastAPI
 
+import src.infrastructure.model_registry  
+
 from src.config.settings import obter_configuracoes
 from src.modules.catalogo.api.rotas import router as produtos_router
 from src.modules.catalogo.api.rotas import router_ingredientes

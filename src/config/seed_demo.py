@@ -1,7 +1,5 @@
 """
-Script único pra desbloquear o teste manual do fluxo âncora sem precisar
-construir os endpoints de Caixa/Operador (fora de escopo por enquanto).
-Rodar uma vez: uv run python -m src.seed_demo
+Rodar uma vez: uv run python -m src.config.seed_demo
 """
 from sqlalchemy import text
 
