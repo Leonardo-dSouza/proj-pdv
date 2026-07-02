@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from decimal import Decimal
 
-from core.interfaces.item_vendavel import ItemVendavel
+from src.core.interfaces.item_vendavel import ItemVendavel
 
 
 @dataclass

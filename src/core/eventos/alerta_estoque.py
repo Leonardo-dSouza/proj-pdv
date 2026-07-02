@@ -10,4 +10,4 @@ class AlertaEstoque:
     nome_ingrediente: str
     quantidade_atual: Decimal
     estoque_minimo: Decimal
-    data_alerta: datetime = field(default_factory=datetime.utcnow)
+    data_alerta: datetime = field(default_factory=datetime.now)
