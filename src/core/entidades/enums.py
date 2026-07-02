@@ -14,3 +14,13 @@ class StatusPedido(str, Enum):
     PRONTO = "PRONTO"
     ENTREGUE = "ENTREGUE"
     CANCELADO = "CANCELADO"
+
+
+class Perfil(str, Enum):
+    GERENTE = "GERENTE"
+    ATENDENTE = "ATENDENTE"
+
+class MesaStatus(str, Enum):
+    LIVRE = "LIVRE"
+    OCUPADA = "OCUPADA"
+    AGUARDANDO_FECHAMENTO = "AGUARDANDO_FECHAMENTO"

@@ -3,9 +3,9 @@ from dataclasses import dataclass, field
 from datetime import datetime
 from decimal import Decimal
 
-from core.entidades.enums import StatusPedido, TipoPedido
-from core.entidades.item_pedido import ItemPedido
-from core.excecoes import TransicaoStatusInvalidaError
+from src.core.entidades.enums import StatusPedido, TipoPedido
+from src.core.entidades.item_pedido import ItemPedido
+from src.core.excecoes import TransicaoStatusInvalidaError
 
 # Regra: CANCELADO é alcançável de qualquer status exceto ENTREGUE.
 TRANSICOES_VALIDAS: dict[StatusPedido, set[StatusPedido]] = {

@@ -7,6 +7,9 @@ from src.config.settings import obter_configuracoes
 from src.infrastructure.database import Base
 from src.modules.catalogo.infraestrutura.modelos import ProdutoModel, IngredienteModel, ComposicaoItemModel, ComboModel, ComboProdutoModel  
 
+from src.infrastructure.database import Base
+from src.infrastructure import model_registry  
+
 config = context.config
 
 if config.config_file_name is not None:
